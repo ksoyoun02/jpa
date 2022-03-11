@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h2>loginPage</h2>
+</body>
+<span th:text="${member.id}"></span><br>
+<span th:text="${member.pwd}"></span><br>
+<span th:text="${member.name}"></span>
+
+<form th:action="@{loginFind}" th:object="${member}" method="get">
+	 <input type="text" th:field="*{id}" placeholder="id을 입력하세요">
+	 <input type="text" th:field="*{pwd}" placeholder="pwd을 입력하세요">
+	 <input type="text" th:field="*{name}" placeholder="name을 입력하세요">
+	 <button type="submit"></button>
+</form>
+</html>
