@@ -7,11 +7,9 @@
 <body>
 <h2>loginPage</h2>
 </body>
-<span th:text="${member.id}"></span><br>
-<span th:text="${member.pwd}"></span><br>
-<span th:text="${member.name}"></span>
+<span th:text="${text}"></span><br>
 
-<form th:action="@{loginFind}" th:object="${member}" method="get">
+<form th:action="@{loginFind}" th:object="${member}" method="post">
 	 <input type="text" th:field="*{id}" placeholder="id을 입력하세요">
 	 <input type="text" th:field="*{pwd}" placeholder="pwd을 입력하세요">
 	 <input type="text" th:field="*{name}" placeholder="name을 입력하세요">
