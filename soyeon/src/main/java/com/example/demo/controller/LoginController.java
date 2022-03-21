@@ -30,7 +30,7 @@ public class LoginController {
 	public String login(Model model) {
 		memberDTO mDto = new memberDTO();
 		model.addAttribute("member",mDto);
-		
+		 
 		List<memberDTO> findAll = member_i.findAll();
 		System.out.println("==========================================");
 		System.out.println("findAll : 유형의 모든 인스턴스를 반환 --> " + findAll);
