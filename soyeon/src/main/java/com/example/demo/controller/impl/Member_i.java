@@ -9,6 +9,4 @@ import com.example.demo.dto.memberDTO;
 
 public interface Member_i extends JpaRepository<memberDTO, String>{
 
-	List<memberDTO> findAllById(String memberID);
-
 }

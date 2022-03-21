@@ -30,7 +30,6 @@ public class LoginController {
 	public String login(Model model) {
 		memberDTO mDto = new memberDTO();
 		model.addAttribute("member",mDto);
-		model.addAttribute("text","login");
 		
 		List<memberDTO> findAll = member_i.findAll();
 		System.out.println("==========================================");
@@ -42,11 +41,12 @@ public class LoginController {
 		 	java.util.ArrayList 클래스는 set(), get(), contains()매서드를 가지고있지만
 		 	원소를 추가하는 매서드는 가지고 있지 않기때문에 사이즈를 바꿀수없음.
 		 */
-		List<String> idList = Arrays.asList("testID2","testID");
+		// findAllById -> 주어진 ID를 가진 T 유형의 모든 인스턴스를 반환합니다.
+		List<String> idList = Arrays.asList("test1","test2");
 		List<memberDTO> findAllById = member_i.findAllById(idList);
 		System.out.println("findAllById --> " + findAllById);
 		System.out.println("==========================================");
-		
+		 
 		member_i.flush();
 		//flush : 현재 버퍼에 저장되어 있는 내용을 클라이언트로 전송하고 버퍼를 비운다.
 		

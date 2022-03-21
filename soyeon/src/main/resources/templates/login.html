@@ -4,10 +4,13 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
+<script type="text/javascript">
+
+</script>
 <body>
 <h2>loginPage</h2>
 </body>
-<span th:text="${text}"></span><br>
+<!-- <span th:text="${text}"></span><br> -->
 
 <form th:action="@{loginFind}" th:object="${member}" method="post">
 	 <input type="text" th:field="*{id}" placeholder="id을 입력하세요">
