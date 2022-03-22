@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.example.demo.controller.impl.Member_i;
-import com.example.demo.dto.memberDTO;
+import com.example.demo.dto.Member;
 
 @Controller
 public class LoginController {
@@ -28,10 +28,10 @@ public class LoginController {
 
 	@RequestMapping("/login")
 	public String login(Model model) {
-		memberDTO mDto = new memberDTO();
-		model.addAttribute("member",mDto);
+		Member member = new Member();
+		model.addAttribute("member",member);
 		 
-		List<memberDTO> findAll = member_i.findAll();
+		List<Member> findAll = member_i.findAll();
 		System.out.println("==========================================");
 		System.out.println("findAll : 유형의 모든 인스턴스를 반환 --> " + findAll);
 		System.out.println("==========================================");
@@ -43,7 +43,7 @@ public class LoginController {
 		 */
 		// findAllById -> 주어진 ID를 가진 T 유형의 모든 인스턴스를 반환합니다.
 		List<String> idList = Arrays.asList("test1","test2");
-		List<memberDTO> findAllById = member_i.findAllById(idList);
+		List<Member> findAllById = member_i.findAllById(idList);
 		System.out.println("findAllById --> " + findAllById);
 		System.out.println("==========================================");
 		 
@@ -55,20 +55,20 @@ public class LoginController {
 	}
 	
     @RequestMapping(value = "/loginFind", method = RequestMethod.POST)
-    public String loginFind(HttpServletRequest request, Model model, memberDTO mDto) {
+    public String loginFind(HttpServletRequest request, Model model, Member member) {
     	/*
     	 <Optional 메서드>
     	 	1. isPresent() : 값의 존재 확인
     	 	2. orElse : 없는 경우 다른 대체적인 인스턴스 리턴하게 할 수 있음
     	 	3. orElseThrow : 없는 경우 예외를 던짐
     	 */
-    	Optional<memberDTO> user = member_i.findById(mDto.getId()); 
+    	Optional<Member> user = member_i.findById(member.getId()); 
     	if(user.isPresent() == false) {
     		System.out.println("계정없음");
     	}else {
-    		if(!mDto.getPwd().equals(user.get().getPwd())) {
+    		if(!member.getPwd().equals(user.get().getPwd())) {
     			System.out.println("패스워드오류");
-    		}else if(!mDto.getName().equals(user.get().getName())) {
+    		}else if(!member.getName().equals(user.get().getName())) {
     			System.out.println("이름 오류");
     		}else {
     			System.out.println("회원정보 일치");

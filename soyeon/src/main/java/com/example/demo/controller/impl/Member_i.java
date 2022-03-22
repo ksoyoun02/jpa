@@ -5,8 +5,9 @@ import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.example.demo.dto.memberDTO;
+import com.example.demo.dto.Member;
 
-public interface Member_i extends JpaRepository<memberDTO, String>{
-
+//Spring Data JPA에서 제공하는 JpaRepository 인터페이스를 상속
+public interface Member_i extends JpaRepository<Member, String>{
+	
 }

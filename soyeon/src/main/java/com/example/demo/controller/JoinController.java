@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.demo.controller.impl.Member_i;
-import com.example.demo.dto.memberDTO;
+import com.example.demo.dto.Member;
 
 @Controller
 public class JoinController {
@@ -22,23 +22,23 @@ public class JoinController {
 	Member_i member_i;
 	
 	@GetMapping("/join")
-	public String index(Model model, memberDTO mDto){
+	public String index(Model model, Member member){
 		model.addAttribute("text", "JoinPage");
-		model.addAttribute("member", mDto);
+		model.addAttribute("member", member);
 		
 		return "join";
 	}
 
 	 @ResponseBody
 	 @RequestMapping(value = "/joinChk", method = RequestMethod.POST)
-	 public String joinChk(HttpServletRequest request, Model model, memberDTO mDto) {
+	 public String joinChk(HttpServletRequest request, Model model, Member member) {
 		String resultMsg = "";
-		 Optional<memberDTO> user = member_i.findById(mDto.getId());
+		 Optional<Member> user = member_i.findById(member.getId());
 		if(user.isPresent() == false) {
-			member_i.save(mDto);
+			member_i.save(member);
 			resultMsg = "<script>alert('회원가입성공');location.href = '/main';</script>";
 		}else {
-			model.addAttribute("member",mDto);
+			model.addAttribute("member",member);
 			resultMsg = "<script>alert('이미 존재하는 아이디입니다.');location.href = '/login';</script>";
 			return resultMsg;
 		}

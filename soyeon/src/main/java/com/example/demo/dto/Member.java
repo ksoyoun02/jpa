@@ -26,7 +26,7 @@ import lombok.ToString;
 sequenceName = "MEMBER_SEQ", //매핑할 데이터베이스 시퀀스 이름
 initialValue = 1,
 allocationSize = 1) */
-public class memberDTO {
+public class Member {
 	
 	/*seq로 pk잡고싶을때 사용
 	@GeneratedValue(strategy = GenerationType.SEQUENCE,
