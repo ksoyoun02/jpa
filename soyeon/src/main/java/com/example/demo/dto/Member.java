@@ -1,5 +1,7 @@
 package com.example.demo.dto;
 
+import java.time.LocalDateTime;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -21,7 +23,6 @@ import lombok.ToString;
 @Data
 @Entity
 @Table(name="member")
-
 /*@SequenceGenerator(name = "MEMBER_SEQ_GENERATOR",
 sequenceName = "MEMBER_SEQ", //매핑할 데이터베이스 시퀀스 이름
 initialValue = 1,
@@ -44,4 +45,24 @@ public class Member {
 	
 	@Column
 	private String name;
+	
+	@Column
+	private String account;
+	
+	@Column(name = "last_access_dt")
+	private LocalDateTime lastAccessDt;
+	
+	@Column(name = "reg_dt")
+	private LocalDateTime regDt;
+	
+	public Member() {
+    }
+
+    public Member(String id, String pwd, String name, String account) {
+        this.id = id;
+        this.name = name;
+        this.pwd = pwd;
+        this.account = account;
+    }
+
 }

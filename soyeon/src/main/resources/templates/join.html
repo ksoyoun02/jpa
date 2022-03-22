@@ -1,16 +1,17 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>회원가입 페이지</title>
 </head>
 <body>
-<h2 th:text = "${text}"></h2><hr>
-<form th:action="@{joinChk}" th:object="${member}" method="post">
-	<h2>ID : </h2><input type="text" th:field = "*{id}" placeholder="id입력">
-	<h2>PWD : </h2><input type="text" th:field = "*{pwd}" placeholder="pwd입력">
-	<h2>NAME : </h2><input type="text" th:field = "*{name}" placeholder="name입력">
-	<button type="submit"></button>
+<h1>회원 가입</h1>
+<hr>
+<form th:action="@{/signup}" method="post">
+	<input type="text" name="account" placeholder="account 입력">
+	<input type="text" name="name" placeholder="user name 입력">
+	<input type="password" name="password" placeholder="password 입력">
+	<button type="submit">가입하기</button>
 </form>
 </body>
 </html>

@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.example.demo.controller.impl.Member_i;
+import com.example.demo.controller.impl.MemberDao;
 import com.example.demo.dto.Member;
 
 @Controller
@@ -24,14 +24,14 @@ public class LoginController {
 	
 	
 	@Autowired
-	private Member_i member_i;
+	private MemberDao mDao;
 
 	@RequestMapping("/login")
 	public String login(Model model) {
 		Member member = new Member();
 		model.addAttribute("member",member);
 		 
-		List<Member> findAll = member_i.findAll();
+		List<Member> findAll = mDao.findAll();
 		System.out.println("==========================================");
 		System.out.println("findAll : 유형의 모든 인스턴스를 반환 --> " + findAll);
 		System.out.println("==========================================");
@@ -43,11 +43,11 @@ public class LoginController {
 		 */
 		// findAllById -> 주어진 ID를 가진 T 유형의 모든 인스턴스를 반환합니다.
 		List<String> idList = Arrays.asList("test1","test2");
-		List<Member> findAllById = member_i.findAllById(idList);
+		List<Member> findAllById = mDao.findAllById(idList);
 		System.out.println("findAllById --> " + findAllById);
 		System.out.println("==========================================");
 		 
-		member_i.flush();
+		mDao.flush();
 		//flush : 현재 버퍼에 저장되어 있는 내용을 클라이언트로 전송하고 버퍼를 비운다.
 		
 		
@@ -62,7 +62,7 @@ public class LoginController {
     	 	2. orElse : 없는 경우 다른 대체적인 인스턴스 리턴하게 할 수 있음
     	 	3. orElseThrow : 없는 경우 예외를 던짐
     	 */
-    	Optional<Member> user = member_i.findById(member.getId()); 
+    	Optional<Member> user = mDao.findById(member.getId()); 
     	if(user.isPresent() == false) {
     		System.out.println("계정없음");
     	}else {
