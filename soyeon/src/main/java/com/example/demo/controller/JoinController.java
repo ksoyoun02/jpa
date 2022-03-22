@@ -7,6 +7,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -17,6 +18,7 @@ import com.example.demo.dto.Member;
 import com.example.demo.dto.MemberDTO;
 
 @Controller
+@RequestMapping(value = "/")
 public class JoinController {
 	
 	@Autowired
@@ -26,18 +28,18 @@ public class JoinController {
 	MemberService mService;
 	
 	@GetMapping("/signup")
-	public String index(Model model, Member member){
-		model.addAttribute("text", "JoinPage");
-		model.addAttribute("member", member);
-		
+	public String signup(){
 		return "join";
 	}
 
 	 @ResponseBody
-	 @RequestMapping(value = "/joinChk", method = RequestMethod.POST)
+	 @PostMapping("/signup")
+	 //@RequestMapping(value = "/joinChk", method = RequestMethod.POST)
 	 public String joinChk(HttpServletRequest request, Model model, MemberDTO mDto) {
-		mService.save(mDto);
-		return "redirect:/login";
+		String id = mService.save(mDto);
+		System.out.println(id);
+		System.out.println("test");
+		return "login";
 		 /*
 		 String resultMsg = "";
 		 Optional<Member> user = mDao.findById(member.getId());
@@ -53,21 +55,21 @@ public class JoinController {
 		*/
 	 }   
 	 
- /*	@PreAuthorize("hasRole('ROLE_MEMBER')")
+ 	@PreAuthorize("hasRole('ROLE_MEMBER')")
     @GetMapping("/member/info")
     public String userInfoView() {
-        return "pages/user_info";
+        return "/user_info";
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/admin")
     public String adminView() {
-        return "pages/admin";
+        return "/admin";
     }
 
     @GetMapping("/denied")
     public String deniedView() {
-        return "pages/denied";
+        return "/denied";
     }
-    */
+    
 }

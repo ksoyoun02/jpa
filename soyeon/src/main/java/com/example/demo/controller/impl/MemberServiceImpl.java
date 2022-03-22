@@ -25,9 +25,9 @@ public class MemberServiceImpl implements MemberService{
 	private MemberDao mDao;
 	
 	@Override
-	public UserDetails loadUserByUsername(String account) throws UsernameNotFoundException {
+	public UserDetails loadUserByUsername(String id) throws UsernameNotFoundException {
 		// TODO Auto-generated method stub
-		Optional<Member> memberEntityWrapper = mDao.findByAccount(account);
+		Optional<Member> memberEntityWrapper = mDao.findById(id);
 		Member memberEntity = memberEntityWrapper.orElse(null);
 		
 		List<GrantedAuthority> authorities = new ArrayList<>();

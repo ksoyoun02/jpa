@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -26,8 +27,9 @@ public class LoginController {
 	@Autowired
 	private MemberDao mDao;
 
-	@RequestMapping("/login")
+	@GetMapping("/login")
 	public String login(Model model) {
+		/***
 		Member member = new Member();
 		model.addAttribute("member",member);
 		 
@@ -35,12 +37,12 @@ public class LoginController {
 		System.out.println("==========================================");
 		System.out.println("findAll : 유형의 모든 인스턴스를 반환 --> " + findAll);
 		System.out.println("==========================================");
-		/*
+		
 		 	Arrays.asList()는 Arrays의 private 정적 클래스인 ArrayList를 리턴,
 		 	!!java.util.ArrayList 클래스와 다름
 		 	java.util.ArrayList 클래스는 set(), get(), contains()매서드를 가지고있지만
 		 	원소를 추가하는 매서드는 가지고 있지 않기때문에 사이즈를 바꿀수없음.
-		 */
+		 
 		// findAllById -> 주어진 ID를 가진 T 유형의 모든 인스턴스를 반환합니다.
 		List<String> idList = Arrays.asList("test1","test2");
 		List<Member> findAllById = mDao.findAllById(idList);
@@ -50,12 +52,16 @@ public class LoginController {
 		mDao.flush();
 		//flush : 현재 버퍼에 저장되어 있는 내용을 클라이언트로 전송하고 버퍼를 비운다.
 		
+		***/
+		
 		
 		return "login";
 	}
 	
-    @RequestMapping(value = "/loginFind", method = RequestMethod.POST)
+    //@RequestMapping(value = "/loginFind", method = RequestMethod.POST)
+	//@PostMapping("/login")
     public String loginFind(HttpServletRequest request, Model model, Member member) {
+		System.out.println("test");
     	/*
     	 <Optional 메서드>
     	 	1. isPresent() : 값의 존재 확인
