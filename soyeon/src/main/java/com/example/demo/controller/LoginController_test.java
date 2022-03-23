@@ -21,13 +21,13 @@ import com.example.demo.controller.impl.MemberDao;
 import com.example.demo.dto.Member;
 
 @Controller
-public class LoginController {
+public class LoginController_test {
 	
 	
 	@Autowired
 	private MemberDao mDao;
 
-	@GetMapping("/login")
+	//@GetMapping("/login")
 	public String login(Model model) {
 		/***
 		Member member = new Member();
@@ -72,7 +72,7 @@ public class LoginController {
     	if(user.isPresent() == false) {
     		System.out.println("계정없음");
     	}else {
-    		if(!member.getPwd().equals(user.get().getPwd())) {
+    		if(!member.getPassword().equals(user.get().getPassword())) {
     			System.out.println("패스워드오류");
     		}else if(!member.getName().equals(user.get().getName())) {
     			System.out.println("이름 오류");

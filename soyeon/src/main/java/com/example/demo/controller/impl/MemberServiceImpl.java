@@ -15,6 +15,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.example.demo.Role;
 import com.example.demo.dto.Member;
 import com.example.demo.dto.MemberDTO;
 
@@ -28,13 +29,18 @@ public class MemberServiceImpl implements MemberService{
 	public UserDetails loadUserByUsername(String id) throws UsernameNotFoundException {
 		// TODO Auto-generated method stub
 		Optional<Member> memberEntityWrapper = mDao.findById(id);
+		
 		Member memberEntity = memberEntityWrapper.orElse(null);
 		
 		List<GrantedAuthority> authorities = new ArrayList<>();
 		
-		authorities.add(new SimpleGrantedAuthority("ROLE_MEMBER"));
-		
-		return new User(memberEntity.getId(),memberEntity.getPwd(), authorities);
+		if(("admin").equals(memberEntity.getId())) {
+			authorities.add(new SimpleGrantedAuthority(Role.ADMIN.getValue()));
+		}else {
+			authorities.add(new SimpleGrantedAuthority(Role.MEMBER.getValue()));
+		}
+
+		return new User(memberEntity.getId(),memberEntity.getPassword(), authorities);
 	}
 	
 	@Transactional
@@ -43,10 +49,11 @@ public class MemberServiceImpl implements MemberService{
 		Member member = mDto.toEntity();
         member.setLastAccessDt(LocalDateTime.now());
         member.setRegDt(LocalDateTime.now());
+        System.out.println(member);
 
         // 비밀번호 암호화
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        member.setPwd(passwordEncoder.encode(member.getPwd()));
+        member.setPassword(passwordEncoder.encode(member.getPassword()));
         return mDao.save(member).getId();
 	}
 

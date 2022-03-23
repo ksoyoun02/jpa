@@ -8,15 +8,16 @@ import lombok.Data;
 public class MemberDTO {
 	
 	private String id;
-	private String pwd;
+	private String password;
 	private String name;
-	private String account;
+	private String email;
+	private String role;
 	
 	private LocalDateTime lastAccessDt;
 
     private LocalDateTime regDt;
 
     public Member toEntity() {
-        return new Member(id, pwd, name, account);
+        return new Member(id, password, name, email, role);
     }
 }

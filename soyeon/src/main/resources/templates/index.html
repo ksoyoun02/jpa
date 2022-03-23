@@ -9,13 +9,16 @@
 	<h1>Home Page</h1>
 	<hr>
 	<div>
-	    <a sec:authorize="isAnonymous()" th:href="@{/login}">로그인</a>
-	    <a sec:authorize="isAuthenticated()" th:href="@{/logout}">로그아웃</a>
+	    <a sec:authorize="isAnonymous()" th:href="@{/login}">로그인</a> <!-- 익명의 사용자 -->
+	    <a sec:authorize="isAuthenticated()" th:href="@{/logout}">로그아웃</a> <!-- 인증된 사용자 -->
 	    <a sec:authorize="isAnonymous()" th:href="@{/signup}">회원가입</a>
+	    <a sec:authorize="hasRole('ROLE_MEMBER')" th:href="@{/member/mem_info}">내정보</a> <!-- 특정 롤을 가진 사용자 -->
+	    <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/admin/admin_info}">관리자</a>
+	 	
 	</div>
 	<div>
-	    <a th:href="@{/member/info}">내 정보</a>
-	    <a th:href="@{/admin}">관리자</a>
+	    <a th:href="@{/member/mem_info}">내 정보</a>
+	    <a th:href="@{/admin/admin_info}">관리자</a>
 	</div>
 </body>
 </html>

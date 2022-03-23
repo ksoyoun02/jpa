@@ -10,5 +10,6 @@ import com.example.demo.dto.Member;
 public interface MemberDao extends JpaRepository<Member, String>{
 
 	Optional<Member> findById(String id);
+	int countById(String id);
 	
 }

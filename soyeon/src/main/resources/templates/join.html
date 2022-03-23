@@ -4,15 +4,82 @@
 <meta charset="UTF-8">
 <title>회원가입 페이지</title>
 </head>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script type="text/javascript">
+	var var_idChk = "";
+	
+	function chkID(){
+		var id = $('#id').val();
+		
+		var params = {};
+		params.id = id;
+
+		$.ajax({
+			url : "idChk",
+			type : "get",
+			data : {
+				id : id				
+			},
+			success : function(res){
+				if(res > 0){
+					$('#id').css("background-color","#FFCECE");
+					var_idChk = 1;
+				}else if(res == 0 && id.length != 0){
+					$('#id').css("background-color","#AFEEEE");
+					var_idChk = 0;
+				}else{
+					$('#id').css("background-color","#FFFFFF");
+					var_idChk = "";
+				}
+			}
+		 });
+	}
+	
+	function chkPwd1(){
+		var pwd1 = $('#password').val();
+		var pwd2 = $('#password2').val();
+	}
+	
+	function chkPwd2(){
+		var pwd1 = $('#password').val();
+		var pwd2 = $('#password2').val();
+	}
+	
+	function preSave(){
+		var id = $('#id').val();
+		
+		if(var_idChk == "1"){
+			alert("이미 존재하는 id입니다.");
+			return false;
+		}else if(id.length == 0){
+			alert("id를 입력해주세요.")
+			return false;
+		}else {
+			return true;
+		}
+	}
+	
+	function save(){
+		if(preSave()){
+			var form = document.signForm;
+			form.submit();
+		}
+	}
+</script>
 <body>
 <h1>회원 가입</h1>
 <hr>
-<form th:action="@{/signup}" method="post">
-	<input type="text" name="id" placeholder="id 입력">
-	<input type="text" name="account" placeholder="account 입력">
+<form th:action="@{/signup}" method="post" autocomplete="off" name="signForm">
+	<input type="text" name="id" id="id" placeholder="id 입력" oninput="chkID()">
+	<input type="password" name="password" id="password" placeholder="password 입력" oninput="chkPwd1()">
+	<input type="password" name="password2" id="password2" placeholder="passwordChk 입력" oninput="chkPwd2()">
 	<input type="text" name="name" placeholder="user name 입력">
-	<input type="password" name="pwd" placeholder="password 입력">
-	<button type="submit">가입하기</button>
+	<input type="text" name="email" placeholder="email 입력">
+	<select name = "role">
+		<option value="ROLE_MEMBER">회원</option>
+		<option value="ROLE_ADMIN">관리자</option>
+	</select>
+	<button onclick="save()">가입하기</button>
 </form>
 </body>
 </html>

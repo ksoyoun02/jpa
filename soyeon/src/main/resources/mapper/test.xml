@@ -4,7 +4,7 @@
 <sql id="testcol">
 id,
 name,
-pwd
+password
 </sql>
 
 <select id="test">

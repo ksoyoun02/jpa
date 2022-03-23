@@ -41,13 +41,13 @@ public class Member {
 	
 	//@Column(" ") -> column명과 다르게 mapping 가능
 	@Column
-	private String pwd;
+	private String password;
 	
 	@Column
 	private String name;
 	
 	@Column
-	private String account;
+	private String email;
 	
 	@Column(name = "last_access_dt")
 	private LocalDateTime lastAccessDt;
@@ -55,14 +55,19 @@ public class Member {
 	@Column(name = "reg_dt")
 	private LocalDateTime regDt;
 	
+	@Column
+	private String role;
+	
+	
 	public Member() {
     }
 
-    public Member(String id, String pwd, String name, String account) {
+    public Member(String id, String password, String name, String email, String role) {
         this.id = id;
         this.name = name;
-        this.pwd = pwd;
-        this.account = account;
+        this.password = password;
+        this.email = email;
+        this.role = role;
     }
 
 }
