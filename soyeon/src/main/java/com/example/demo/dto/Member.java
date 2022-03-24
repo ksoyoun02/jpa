@@ -15,6 +15,7 @@ import org.hibernate.annotations.DynamicUpdate;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -69,5 +70,10 @@ public class Member {
         this.email = email;
         this.role = role;
     }
-
+    /*
+    @Builder
+    public member(String id, String password, String name, String email,LocalDateTime lastAccessDt, LocalDateTime regDt, String role) {
+    	
+    }
+*/
 }
