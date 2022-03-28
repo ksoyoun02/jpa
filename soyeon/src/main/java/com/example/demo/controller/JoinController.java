@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.demo.controller.impl.MemberService;
 import com.example.demo.controller.impl.MemberDao;
-import com.example.demo.dto.Member;
 import com.example.demo.dto.MemberDTO;
+import com.example.demo.dto.entity.Member;
 
 @Controller
 @RequestMapping(value = "/")

@@ -16,8 +16,9 @@ public class MemberDTO {
 	private LocalDateTime lastAccessDt;
 
     private LocalDateTime regDt;
-
+/*
     public Member toEntity() {
-        return new Member(id, password, name, email, role);
+        return new Member();
     }
+    */
 }

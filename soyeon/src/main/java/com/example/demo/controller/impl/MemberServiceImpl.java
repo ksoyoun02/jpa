@@ -16,8 +16,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.Role;
-import com.example.demo.dto.Member;
 import com.example.demo.dto.MemberDTO;
+import com.example.demo.dto.entity.Member;
 
 @Service
 public class MemberServiceImpl implements MemberService{
@@ -46,15 +46,21 @@ public class MemberServiceImpl implements MemberService{
 	@Transactional
 	@Override
 	public String save(MemberDTO mDto) {
-		Member member = mDto.toEntity();
-        member.setLastAccessDt(LocalDateTime.now());
-        member.setRegDt(LocalDateTime.now());
-        System.out.println(member);
-
-        // 비밀번호 암호화
+		mDto.setLastAccessDt(LocalDateTime.now());
+		mDto.setRegDt(LocalDateTime.now());
+		 // 비밀번호 암호화
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        member.setPassword(passwordEncoder.encode(member.getPassword()));
+        mDto.setPassword(passwordEncoder.encode(mDto.getPassword()));
+        
+        Member member = Member.builder()
+		.mDto(mDto)
+		.build();
+        
         return mDao.save(member).getId();
+        
+		
+
+       
 	}
 
 }

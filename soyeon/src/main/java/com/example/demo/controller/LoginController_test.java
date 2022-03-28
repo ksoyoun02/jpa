@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.example.demo.controller.impl.MemberDao;
-import com.example.demo.dto.Member;
+import com.example.demo.dto.entity.Member;
 
 @Controller
 public class LoginController_test {
