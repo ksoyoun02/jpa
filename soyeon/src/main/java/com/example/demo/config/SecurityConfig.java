@@ -56,6 +56,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 			//loginPage : 로그인 페이지 경로와 로그인 인증경로를 등록
 			.defaultSuccessUrl("/")
 			//defaultSuccessUrl : 로그인 성공시 이동하는 페이지를 등록
+			.usernameParameter("username")
+			.passwordParameter("password")
+			.successHandler(new LoginSuccessHandler())
 			.permitAll();
 		
 		http.logout() //로그아웃 설정

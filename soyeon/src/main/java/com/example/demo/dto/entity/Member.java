@@ -7,14 +7,26 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import com.example.demo.dto.MemberDTO;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 
+import lombok.AccessLevel;
 import lombok.Builder;
+import lombok.Data;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
+@DynamicUpdate
+@DynamicInsert
+//@AllArgsConstructor  //모든 멤버 필드에 대해서 매개변수를 받는 기본 생성자
+@NoArgsConstructor(access = AccessLevel.PROTECTED) //기본생성자
 @Getter
+@Data
 @Entity
+@ToString
 @Table(name = "member")
+
 /*
  * @SequenceGenerator(name = "MEMBER_SEQ_GENERATOR", sequenceName =
  * "MEMBER_SEQ", //매핑할 데이터베이스 시퀀스 이름 initialValue = 1, allocationSize = 1)
@@ -51,10 +63,10 @@ public class Member {
 	@Column
 	private String role;
 
-	
+	/*
 	public Member() {
 	}
-	/*
+	
 	public Member(String id, String password, String name, String email, String role) {
 		this.id = id;
 		this.name = name;
@@ -64,14 +76,18 @@ public class Member {
 	}
 	*/
 	@Builder
-	public Member(MemberDTO mDto) {
-		this.id = mDto.getId();
-		this.password = mDto.getPassword();
-		this.name = mDto.getName();
-		this.email = mDto.getEmail();
-		this.role = mDto.getRole();
-		this.lastAccessDt = mDto.getLastAccessDt();
-		this.regDt = mDto.getRegDt();
+	public Member(String id, String password, String name, String email, LocalDateTime lastAccessDt,
+			LocalDateTime regDt, String role) {
+		super();
+		this.id = id;
+		this.password = password;
+		this.name = name;
+		this.email = email;
+		this.lastAccessDt = lastAccessDt;
+		this.regDt = regDt;
+		this.role = role;
 	}
+
+	
 	 
 }

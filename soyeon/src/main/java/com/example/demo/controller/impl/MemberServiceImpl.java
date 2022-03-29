@@ -39,7 +39,7 @@ public class MemberServiceImpl implements MemberService{
 		}else {
 			authorities.add(new SimpleGrantedAuthority(Role.MEMBER.getValue()));
 		}
-
+		
 		return new User(memberEntity.getId(),memberEntity.getPassword(), authorities);
 	}
 	
@@ -53,7 +53,13 @@ public class MemberServiceImpl implements MemberService{
         mDto.setPassword(passwordEncoder.encode(mDto.getPassword()));
         
         Member member = Member.builder()
-		.mDto(mDto)
+		.id(mDto.getId())
+		.password(mDto.getPassword())
+		.name(mDto.getName())
+		.email(mDto.getEmail())
+		.role(mDto.getRole())
+		.lastAccessDt(mDto.getLastAccessDt())
+		.regDt(mDto.getRegDt())
 		.build();
         
         return mDao.save(member).getId();
