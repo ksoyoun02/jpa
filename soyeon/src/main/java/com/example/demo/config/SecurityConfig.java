@@ -13,7 +13,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-import com.example.demo.controller.impl.MemberService;
+import com.example.demo.controller.member.MemberService;
 
 @Configuration // @Bean 어노테이션만 주어도 스프링 컨테이너에 빈으로 등록은 가능, 하지만 싱글톤을 보장받지 못함
 @EnableWebSecurity //spring security를 활성화시킴

@@ -1,8 +1,8 @@
-package com.example.demo.controller.impl;
+package com.example.demo.controller.member;
 
 import org.springframework.security.core.userdetails.UserDetailsService;
 
-import com.example.demo.dto.MemberDTO;
+import com.example.demo.dto.member.MemberDTO;
 
 public interface MemberService extends UserDetailsService{
 

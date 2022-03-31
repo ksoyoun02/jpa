@@ -1,4 +1,4 @@
-package com.example.demo.dto.entity;
+package com.example.demo.dto.member.entity;
 
 import java.time.LocalDateTime;
 
@@ -12,7 +12,6 @@ import org.hibernate.annotations.DynamicUpdate;
 
 import lombok.AccessLevel;
 import lombok.Builder;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -22,7 +21,7 @@ import lombok.ToString;
 //@AllArgsConstructor  //모든 멤버 필드에 대해서 매개변수를 받는 기본 생성자
 @NoArgsConstructor(access = AccessLevel.PROTECTED) //기본생성자
 @Getter
-@Data
+//@Data
 @Entity
 @ToString
 @Table(name = "member")
@@ -50,7 +49,7 @@ public class Member {
 
 	@Column
 	private String name;
-
+ 
 	@Column
 	private String email;
 

@@ -5,20 +5,18 @@ import java.util.Optional;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.example.demo.controller.impl.MemberService;
-import com.example.demo.controller.impl.MemberDao;
-import com.example.demo.dto.MemberDTO;
-import com.example.demo.dto.entity.Member;
+import com.example.demo.controller.member.MemberDao;
+import com.example.demo.controller.member.MemberService;
+import com.example.demo.dto.member.MemberDTO;
+import com.example.demo.dto.member.entity.Member;
 
 @Controller
 @RequestMapping(value = "/")

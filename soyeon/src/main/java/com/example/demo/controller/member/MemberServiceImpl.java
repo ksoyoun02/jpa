@@ -1,4 +1,4 @@
-package com.example.demo.controller.impl;
+package com.example.demo.controller.member;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -16,8 +16,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.Role;
-import com.example.demo.dto.MemberDTO;
-import com.example.demo.dto.entity.Member;
+import com.example.demo.dto.member.MemberDTO;
+import com.example.demo.dto.member.entity.Member;
 
 @Service
 public class MemberServiceImpl implements MemberService{
