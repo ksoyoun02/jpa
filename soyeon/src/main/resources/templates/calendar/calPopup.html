@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script type="text/javascript">
+	function preSave(){
+	
+		var title = $('#title').val();
+		var startDt = $('#startDt').val();
+		var endDt = $('#endDt').val();
+		
+		if(title == ""){
+			alert("title 입력");
+			return false;
+		}else{
+			return true;
+		}
+	};
+	
+	function save(){
+		if(preSave()){
+			var form = document.addCalendarForm;
+			form.submit();
+		}
+	}
+</script>
+<body>
+<form th:action="@{/calendar/addCalendar}" method="post" name="addCalendarForm">
+	<input type="text" id="title" name="title" value="title">
+	<input type="text" id="detail" name="detail" value="detail">
+	<span th:text="${#dates.format(${startDt}, 'yyyy-MM-dd')}"></span>
+	<input type="datetime-local" id="endDt" name="endDt">
+	<button onclick="save()">등록하기</button>
+	<button onclick="update()">수정하기</button>
+	<button onclick="delete_()">삭제하기</button>
+	
+</form>
+</body>
+</html>
