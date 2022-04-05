@@ -62,13 +62,13 @@ var header = $("meta[name='_csrf_header']").attr("content");
 					xhr.setRequestHeader(header, token);
 				},
 				success : function(res){
-					if(res == 1){debugger;
+					if(res == 1){
 						alert("일정등록성공");
-						parent.location.reload();
+						window.opener.test(); 
 						window.close();
 					}else{
 						alert("일정등록실패")
-						parent.location.reload();
+						window.opener.test(); 
 						window.close();
 					}
 				}
@@ -77,13 +77,6 @@ var header = $("meta[name='_csrf_header']").attr("content");
 		}
 	}
 	
-	function form_submit(){
-		//window.close();
-	}
-	
-	window.onload = function(){
-		debugger;
-	}
 </script>
 <body>
 <form>
