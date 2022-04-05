@@ -10,6 +10,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -74,18 +75,25 @@ public class CalendarController {
 		return "calendar/calPopup";
 	}
 	
+	//@RequestMapping(value = "/addCalendar", method = {RequestMethod.POST})
 	@PostMapping("/addCalendar")
-	public String addCalendar(Authentication authentication, CalendarDTO cDto) {
-		System.out.println(cDto);
-		String id = authentication.getName();
-		calRepository.save(CalEntity.builder()
-							.id(id)
-							.title(cDto.getTitle())
-							.detail(cDto.getDetail())
-							.startDt(cDto.getStartDt())
-							.endDt(cDto.getEndDt())
-							.build());
+	public @ResponseBody int addCalendar(Authentication authentication, @ModelAttribute CalendarDTO cDto) {
+		int result = 0;
 		
-		return "calendar/calendarMain";
+		String id = authentication.getName();
+		CalEntity test = calRepository.save(CalEntity.builder()
+				.id(id)
+				.title(cDto.getTitle())
+				.detail(cDto.getDetail())
+				.startDt(cDto.getStartDt())
+				.endDt(cDto.getEndDt())
+				.build());
+		System.out.println(test.getSeq());
+		if(test.getId() == "") {
+			result = 0;
+		}else {
+			result = 1;
+		}
+		return result;
 	}
 }
