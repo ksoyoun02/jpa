@@ -12,8 +12,8 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
+
+import com.example.demo.dto.BaseTimeEntity;
 
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -34,7 +34,7 @@ import lombok.ToString;
 	initialValue=1, //시작값
 	allocationSize=1 //메모리를 통해 할당할 범위 사이즈
 )
-public class CalEntity {
+public class CalEntity extends BaseTimeEntity{
 	
     @Id
     @GeneratedValue(
@@ -58,17 +58,18 @@ public class CalEntity {
     @Column(name = "end_dt")
     private LocalDateTime endDt;
     
-    @CreatedDate
-    @Column(name = "reg_dt")
-    private LocalDateTime regDt;
-    
-    @LastModifiedDate
-    @Column(name = "update_dt")
-	private LocalDateTime updateDt;
+	/*
+	 * @CreatedDate
+	 * 
+	 * @Column(name = "reg_dt") private LocalDateTime regDt;
+	 * 
+	 * @LastModifiedDate
+	 * 
+	 * @Column(name = "update_dt") private LocalDateTime updateDt;
+	 */
 
     @Builder
-	public CalEntity(int seq, String id, String title, String detail, LocalDateTime startDt, LocalDateTime endDt,
-			LocalDateTime regDt, LocalDateTime updateDt) {
+	public CalEntity(int seq, String id, String title, String detail, LocalDateTime startDt, LocalDateTime endDt) {
 		super();
 		this.seq = seq;
 		this.id = id;
@@ -76,8 +77,6 @@ public class CalEntity {
 		this.detail = detail;
 		this.startDt = startDt;
 		this.endDt = endDt;
-		this.regDt = regDt;
-		this.updateDt = updateDt;
 	}
 
 

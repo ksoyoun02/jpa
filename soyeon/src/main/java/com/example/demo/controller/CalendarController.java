@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,6 +20,7 @@ import com.example.demo.dto.calendar.CalendarDTO;
 import com.example.demo.dto.calendar.entity.CalEntity;
 
 @Controller
+@EnableJpaAuditing
 @RequestMapping(value = "/calendar")
 public class CalendarController {
 	
@@ -69,7 +71,6 @@ public class CalendarController {
 	@GetMapping("/calPopup")
 	public String calPopup(@RequestParam("startDt") String startDt, Model model) {
 		model.addAttribute("startDt", startDt);
-		System.out.println(startDt);
 		return "calendar/calPopup";
 	}
 	

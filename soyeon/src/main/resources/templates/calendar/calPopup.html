@@ -7,13 +7,18 @@
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script type="text/javascript">
 	function preSave(){
-	
 		var title = $('#title').val();
-		var startDt = $('#startDt').val();
-		var endDt = $('#endDt').val();
+		var startDt = $('#startDate').val();
+		var endDt = $('#endDate').val();
 		
 		if(title == ""){
 			alert("title 입력");
+			return false;
+		}else if(startDt == ""){
+			alert("시작날짜 입력");
+			return false;
+		}else if(endDt == ""){
+			alert("종료날짜 입력");
 			return false;
 		}else{
 			return true;
@@ -22,6 +27,23 @@
 	
 	function save(){
 		if(preSave()){
+			var startDate = $('#startDate').val();
+			var startTime = $('#startTime').val();
+			var endDate = $('#endDate').val();
+			var endTime = $('#endTime').val();
+			
+			if(startTime == ""){
+				$('#startDt').val(startDate + "T00:00")
+			}else{
+				$('#startDt').val(startDate + "T" + startTime);
+			}
+			
+			if(endTime == ""){
+				$('#endDt').val(endDate + "T00:00")
+			}else{
+				$('#endDt').val(endDate + "T" + endTime);
+			}
+			
 			var form = document.addCalendarForm;
 			form.submit();
 		}
@@ -31,8 +53,15 @@
 <form th:action="@{/calendar/addCalendar}" method="post" name="addCalendarForm">
 	<input type="text" id="title" name="title" value="title">
 	<input type="text" id="detail" name="detail" value="detail">
-	<span th:text="${#dates.format(${startDt}, 'yyyy-MM-dd')}"></span>
-	<input type="datetime-local" id="endDt" name="endDt">
+ 	<input type="date" id="startDate" name="startDate" th:value="${startDt}">
+	<input type="time" id="startTime" name="startTime">
+	<input type="hidden" id="startDt" name="startDt">
+	<input type="date" id="endDate" name="endDate">
+	<input type="time" id="endTime" name="endTime">
+	<input type="hidden" id="endDt" name="endDt">
+	<!-- <input type="datetime-local" id="startDt" name="startDt">
+	<input type="datetime-local" id="endDt" name="endDt"> -->
+	
 	<button onclick="save()">등록하기</button>
 	<button onclick="update()">수정하기</button>
 	<button onclick="delete_()">삭제하기</button>
