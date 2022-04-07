@@ -6,6 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.example.demo.dto.calendar.entity.CalEntity;
 
-public interface CalendarRepository extends JpaRepository<CalEntity, Long>{
+public interface CalendarRepository extends JpaRepository<CalEntity, Integer>{
 	 List<CalEntity> findAllById(String id);
 }

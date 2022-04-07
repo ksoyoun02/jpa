@@ -1,11 +1,11 @@
 package com.example.demo.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,7 +21,6 @@ import com.example.demo.dto.calendar.CalendarDTO;
 import com.example.demo.dto.calendar.entity.CalEntity;
 
 @Controller
-@EnableJpaAuditing
 @RequestMapping(value = "/calendar")
 public class CalendarController {
 	
@@ -95,5 +94,19 @@ public class CalendarController {
 			result = 1;
 		}
 		return result;
+	}
+	
+	@GetMapping("calDetailPopup")
+	public String calDetailPopup(Authentication authentication, @RequestParam("seq") int seq, Model model) {
+		model.addAttribute("seq",seq);
+		return "calendar/calDetailPopup";
+	}
+	
+	@GetMapping("/calDetail")
+	public @ResponseBody Optional<CalEntity> calDetail(@RequestParam("seq") int seq) {
+		
+		Optional<CalEntity> calDetail = calRepository.findById(seq);
+		
+		return calDetail;
 	}
 }

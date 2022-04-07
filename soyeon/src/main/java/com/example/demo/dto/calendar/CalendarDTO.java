@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class CalendarDTO {
 	
-	private long seq;
+	private int seq;
 	private String id;
 	private String title;
 	private String detail;

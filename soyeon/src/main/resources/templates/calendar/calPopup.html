@@ -77,21 +77,26 @@ var header = $("meta[name='_csrf_header']").attr("content");
 		}
 	}
 	
+	function cancel(){
+		window.close();
+	}
 </script>
 <body>
 <form>
-	<input type="text" id="title" name="title">
-	<input type="text" id="detail" name="detail">
+	<span>일정이름 : </span>
+	<input type="text" id="title" name="title"><br>
+	<span>일정내용 : </span>
+	<input type="text" id="detail" name="detail"><br>
+	<span>시작일 : </span>
  	<input type="date" id="startDate" name="startDate" th:value="${startDt}">
 	<input type="time" id="startTime" name="startTime">
-	<input type="hidden" id="startDt" name="startDt">
+	<input type="hidden" id="startDt" name="startDt"><br>
+	<span>종료일 : </span>
 	<input type="date" id="endDate" name="endDate">
 	<input type="time" id="endTime" name="endTime">
-	<input type="hidden" id="endDt" name="endDt">
-	
+	<input type="hidden" id="endDt" name="endDt"><br>
 	<button type="button" onclick="save()">등록하기</button>
-	<button type="button" onclick="update()">수정하기</button>
-	<button type="button" onclick="delete_()">삭제하기</button>
+	<button type="button" onclick="cancel()">닫기</button>
 </form>
 </body>
 </html>

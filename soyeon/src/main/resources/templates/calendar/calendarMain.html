@@ -42,6 +42,7 @@
 				success : function(res){
 					for(var i = 0; i < res.length; i++){
 						calendar.addEvent({
+							seq : res[i].seq, 
 							 title: res[i].title,
 					          start: res[i].startDt,
 					          end : res[i].endDt
@@ -54,7 +55,13 @@
 	   		var url = "/calendar/calPopup?startDt="+info.dateStr;
 	   		var popOption = "top=10, left=10, width=500, height=600, status=no, menubar=no, toolbar=no, resizable=no, directories=no"
 	   		window.open(url,'',popOption);
-	   	  }
+	   	  },
+    	eventClick: function(info){
+    		var url = "/calendar/calDetailPopup?seq="+info.event.extendedProps.seq;
+	   		var popOption = "top=10, left=10, width=500, height=600, status=no, menubar=no, toolbar=no, resizable=no, directories=no"
+	   		window.open(url,'',popOption);
+    		
+    	} 
 	  });
 	  
 	  calendar.render();

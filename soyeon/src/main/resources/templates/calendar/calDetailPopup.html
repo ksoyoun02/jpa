@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<meta name="_csrf" th:content="${_csrf.token}"/>
+<meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+</head>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script type="text/javascript">
+var token = $("meta[name='_csrf']").attr("content");
+var header = $("meta[name='_csrf_header']").attr("content");
+
+	window.onload = function(){
+		find();
+	}
+	
+	function find(){
+		const url = new URL(location.href);
+		const urlParams = url.searchParams;
+		
+		$.ajax({
+			anyne : true,
+			url : "/calendar/calDetail",
+			data : {
+				seq : urlParams.get('seq')
+			},
+			type : "get",
+		 	success: function(res){
+
+		 		var startDt = res.startDt;
+		 		var endDt = res.endDt;
+		 		
+		 		$('#seq').val(res.seq);
+		 		$('#title').val(res.title);
+		 		$('#detail').val(res.detail);
+		 		$('#startDate').val(startDt.substring(0,10));
+		 		$('#startTime').val(startDt.substring(11));
+		 		$('#endDate').val(endDt.substring(0,10));
+		 		$('#endTime').val(endDt.substring(11));
+		 		
+		 		$('#save_btn').attr('disabled',true);
+		 		
+		 	}
+		})
+	}
+	
+	function cancel(){
+		window.close();
+	}
+	
+	
+</script>
+<body>
+<form action="">
+	<input type="hidden" id="seq">
+	<span>일정이름 : </span>
+	<input type="text" id="title" disabled="disabled"><br>
+	<span>일정내용 : </span>
+	<input type="text" id="detail" disabled="disabled"><br>
+	<span>시작일 : </span>
+	<input type="date" id="startDate" disabled="disabled">
+	<input type="time" id="startTime" disabled="disabled">
+	<input type="hidden" id="startDt" name="startDt"><br>
+	<span>종료일 : </span>
+	<input type="date" id="endDate" disabled="disabled">
+	<input type="time" id="endTime" disabled="disabled">
+	<input type="hidden" id="endDt" name="endDt"><br>
+	<button type="button" onclick="update()" id="update_btn">수정하기</button>
+	<button type="button" onclick="save()" id="save_btn">저장하기</button>
+	<button type="button" onclick="close()">취소하기</button>
+</form>
+</body>
+</html>
