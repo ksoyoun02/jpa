@@ -28,24 +28,15 @@ var header = $("meta[name='_csrf_header']").attr("content");
 			var endDate = $('#endDate').val();
 			var endTime = $('#endTime').val();
 			
-			if(startTime == ""){
-				$('#startDt').val(startDate + "T00:00")
-			}else{
-				$('#startDt').val(startDate + "T" + startTime);
-			}
-			
-			if(endTime == ""){
-				$('#endDt').val(endDate + "T00:00")
-			}else{
-				$('#endDt').val(endDate + "T" + endTime);
-			}
-			
+			$('#startDt').val(startDate + "T" + startTime + ":00");
+			$('#endDt').val(endDate + "T" + endTime + ":00");
 			return true;
 		}
 	};
 	
 	function save(){
 		if(preSave()){
+			debugger;
 			$.ajax({
 				anyne:true,
 				url : "/calendar/addCalendar",
@@ -64,11 +55,11 @@ var header = $("meta[name='_csrf_header']").attr("content");
 				success : function(res){
 					if(res == 1){
 						alert("일정등록성공");
-						window.opener.test(); 
+						window.opener.reload(); 
 						window.close();
 					}else{
 						alert("일정등록실패")
-						window.opener.test(); 
+						window.opener.reload(); 
 						window.close();
 					}
 				}
@@ -89,11 +80,11 @@ var header = $("meta[name='_csrf_header']").attr("content");
 	<input type="text" id="detail" name="detail"><br>
 	<span>시작일 : </span>
  	<input type="date" id="startDate" name="startDate" th:value="${startDt}">
-	<input type="time" id="startTime" name="startTime">
+	<input type="time" id="startTime" name="startTime" value="12:00">
 	<input type="hidden" id="startDt" name="startDt"><br>
 	<span>종료일 : </span>
 	<input type="date" id="endDate" name="endDate">
-	<input type="time" id="endTime" name="endTime">
+	<input type="time" id="endTime" name="endTime" value="12:00">
 	<input type="hidden" id="endDt" name="endDt"><br>
 	<button type="button" onclick="save()">등록하기</button>
 	<button type="button" onclick="cancel()">닫기</button>

@@ -18,9 +18,9 @@ public class CalendarDTO {
 	private String title;
 	private String detail;
 	
-	@DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
+	@DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
 	private LocalDateTime startDt;
-	@DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
+	@DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
 	private LocalDateTime endDt;
 	
 	private LocalDateTime regDt;

@@ -49,26 +49,96 @@ var header = $("meta[name='_csrf_header']").attr("content");
 		window.close();
 	}
 	
+	function update(){
+		$('#title').attr('disabled',false);
+ 		$('#detail').attr('disabled',false);
+ 		$('#startDate').attr('disabled',false);
+ 		$('#startTime').attr('disabled',false);
+ 		$('#endDate').attr('disabled',false);
+ 		$('#endTime').attr('disabled',false);
+ 		
+ 		$('#update_btn').attr('disabled',true);
+ 		$('#save_btn').attr('disabled',false);
+	}
 	
+	function preSave(){
+		var title = $('#title').val();
+		var startDate = $('#startDate').val();
+		var endDate = $('#endDate').val();
+		
+		if(title == ""){
+			alert("title 입력");
+		}else if(startDate == ""){
+			alert("시작날짜 입력");
+		}else if(endDate == ""){
+			alert("종료날짜 입력");
+		}else{
+			var startDate = $('#startDate').val();
+			var startTime = $('#startTime').val();
+			var endDate = $('#endDate').val();
+			var endTime = $('#endTime').val();
+			
+			$('#startDt').val(startDate + "T" + startTime + ":00");
+			$('#endDt').val(endDate + "T" + endTime + ":00");
+			
+			return true;
+		}
+	};
+	
+	function save(){
+		const url = new URL(location.href);
+		const urlParams = url.searchParams;
+
+		if(preSave()){
+			$.ajax({
+				anyne : true,
+				url : "/calendar/addCalendar",
+				type : "post",
+			 	data : {
+			 		seq : urlParams.get('seq'),
+			 		title : $('#title').val(),
+			 		detail : $('#detail').val(),
+			 		startDt : $('#startDt').val(),
+			 		endDt : $('#endDt').val(),
+			 	}, 
+			 	contentType : "application/x-www-form-urlencoded; charset=utf-8",
+				dataType : "json",
+			 	beforeSend : function(xhr){
+					xhr.setRequestHeader(header, token);
+				},
+				success : function(res){
+					if(res == 1){
+						alert("일정수정성공");
+						window.opener.reload(); 
+						window.close();
+					}else{
+						alert("일정수정실패")
+						window.opener.reload(); 
+						window.close();
+					}
+				}
+			});
+		}
+	}
 </script>
 <body>
-<form action="">
-	<input type="hidden" id="seq">
+<form>
+	<input type="hidden" id="seq" name="seq" value="">
 	<span>일정이름 : </span>
-	<input type="text" id="title" disabled="disabled"><br>
+	<input type="text" id="title" name="title" value="" disabled="disabled"><br>
 	<span>일정내용 : </span>
-	<input type="text" id="detail" disabled="disabled"><br>
+	<input type="text" id="detail" name="detail" value="" disabled="disabled"><br>
 	<span>시작일 : </span>
-	<input type="date" id="startDate" disabled="disabled">
-	<input type="time" id="startTime" disabled="disabled">
-	<input type="hidden" id="startDt" name="startDt"><br>
+	<input type="date" id="startDate" name="startDate" value="" disabled="disabled">
+	<input type="time" id="startTime" name="startTime" value="" disabled="disabled">
+	<input type="hidden" id="startDt" name="startDt" value=""><br>
 	<span>종료일 : </span>
-	<input type="date" id="endDate" disabled="disabled">
-	<input type="time" id="endTime" disabled="disabled">
-	<input type="hidden" id="endDt" name="endDt"><br>
+	<input type="date" id="endDate" name="endDate" value="" disabled="disabled">
+	<input type="time" id="endTime" name="endTime" value="" disabled="disabled">
+	<input type="hidden" id="endDt" name="endDt" value=""><br>
 	<button type="button" onclick="update()" id="update_btn">수정하기</button>
 	<button type="button" onclick="save()" id="save_btn">저장하기</button>
-	<button type="button" onclick="close()">취소하기</button>
+	<button type="button" onclick="cancel()">취소하기</button>
 </form>
 </body>
 </html>

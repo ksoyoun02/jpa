@@ -78,9 +78,10 @@ public class CalendarController {
 	@PostMapping("/addCalendar")
 	public @ResponseBody int addCalendar(Authentication authentication, @ModelAttribute CalendarDTO cDto) {
 		int result = 0;
-		
+		System.out.println(cDto);
 		String id = authentication.getName();
 		CalEntity test = calRepository.save(CalEntity.builder()
+				.seq(cDto.getSeq())
 				.id(id)
 				.title(cDto.getTitle())
 				.detail(cDto.getDetail())
@@ -94,7 +95,7 @@ public class CalendarController {
 			result = 1;
 		}
 		return result;
-	}
+	} 
 	
 	@GetMapping("calDetailPopup")
 	public String calDetailPopup(Authentication authentication, @RequestParam("seq") int seq, Model model) {

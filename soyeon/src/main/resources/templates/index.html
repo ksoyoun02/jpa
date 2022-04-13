@@ -1,11 +1,14 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.w3.org/1999/xhtml" 
-      xmlns:sec="http://www.w3.org/1999/xhtml">
+<html 
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/default_layout">
 <head>
 	<meta charset="UTF-8">
 	<title>Home</title>
 </head>
 <body>
+<th:block layout:fragment="content">
 	<h1>Home Page</h1>
 	<hr>
 	<div>
@@ -21,5 +24,6 @@
 	    <a th:href="@{/member/mem_info}">내 정보</a>
 	    <a th:href="@{/admin/admin_info}">관리자</a>
 	</div>
+	</th:block>
 </body>
 </html>
