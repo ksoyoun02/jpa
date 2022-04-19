@@ -17,6 +17,7 @@
 		    <a sec:authorize="isAnonymous()" th:href="@{/signup}">회원가입</a>
 		    <a sec:authorize="hasRole('ROLE_MEMBER')" th:href="@{/member/mem_info}">내정보</a> <!-- 특정 롤을 가진 사용자 -->
 		    <a sec:authorize="hasRole('ROLE_MEMBER')" th:href="@{/calendar/calendarMain}">캘린더</a> <!-- 특정 롤을 가진 사용자 -->
+		    <a th:href="@{/board/boardList}">게시판</a>
 		    <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/admin/admin_info}">관리자</a>
 		 	
 		</div>
